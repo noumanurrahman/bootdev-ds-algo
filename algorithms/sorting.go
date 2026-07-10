@@ -13,3 +13,17 @@ func BubbleSort(array []int) {
 		}
 	}
 }
+
+func InsertionSort(array []int) {
+	i := 1
+	j := 1
+	for i < len(array) {
+		if j > 0 && array[j] < array[j-1] {
+			array[j], array[j-1] = array[j-1], array[j]
+			j--
+		} else {
+			i++
+			j = i
+		}
+	}
+}

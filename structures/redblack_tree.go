@@ -31,7 +31,7 @@ func (tree *RBTree) Insert(value int) {
 	newNode.right = tree.null
 	current := tree.root
 	var parent *RBNode
-	for current != nil && current != tree.null {
+	for current != tree.null {
 		parent = current
 		if *newNode.value < *current.value {
 			current = current.left
@@ -99,7 +99,7 @@ func (tree *RBTree) FixInsert(node *RBNode) {
 }
 
 func (tree *RBTree) RotateLeft(pivotParent *RBNode) {
-	if pivotParent == nil || pivotParent.right == nil {
+	if pivotParent == tree.null || pivotParent.right == tree.null {
 		return
 	}
 	pivot := pivotParent.right
@@ -120,7 +120,7 @@ func (tree *RBTree) RotateLeft(pivotParent *RBNode) {
 }
 
 func (tree *RBTree) RotateRight(pivotParent *RBNode) {
-	if pivotParent == nil || pivotParent.left == nil {
+	if pivotParent == tree.null || pivotParent.left == tree.null {
 		return
 	}
 	pivot := pivotParent.left

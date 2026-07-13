@@ -27,6 +27,8 @@ func (tree *RBTree) New() {
 
 func (tree *RBTree) Insert(value int) {
 	newNode := RBNode{value: &value, red: true}
+	newNode.left = tree.null
+	newNode.right = tree.null
 	current := tree.root
 	var parent *RBNode
 	for current != nil && current != tree.null {

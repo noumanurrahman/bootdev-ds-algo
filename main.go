@@ -9,5 +9,6 @@ func main() {
 	//examples.Queues()
 	//examples.LinkedList()
 	//examples.BinaryTree()
-	examples.RedBlackTree()
+	//examples.RedBlackTree()
+	examples.HashMap()
 }

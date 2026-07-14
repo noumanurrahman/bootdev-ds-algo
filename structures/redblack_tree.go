@@ -55,22 +55,21 @@ func (tree *RBTree) Insert(value int) {
 }
 
 func (tree *RBTree) FixInsert(node *RBNode) {
-	current := node
-	for tree.root != current && current.parent.red {
-		parent := current.parent
+	for tree.root != node && node.parent.red {
+		parent := node.parent
 		grandparent := parent.parent
 		if parent == grandparent.right {
 			uncle := grandparent.left
-			if uncle != nil && uncle.red {
+			if uncle.red {
 				uncle.red = false
 				parent.red = false
 				grandparent.red = true
-				current = grandparent
+				node = grandparent
 			} else {
-				if current == parent.left {
-					current = parent
-					tree.RotateRight(current)
-					parent = current.parent
+				if node == parent.left {
+					node = parent
+					tree.RotateRight(node)
+					parent = node.parent
 				}
 				parent.red = false
 				grandparent.red = true
@@ -78,16 +77,16 @@ func (tree *RBTree) FixInsert(node *RBNode) {
 			}
 		} else if parent == grandparent.left {
 			uncle := grandparent.right
-			if uncle != nil && uncle.red {
+			if uncle.red {
 				uncle.red = false
 				parent.red = false
 				grandparent.red = true
-				current = grandparent
+				node = grandparent
 			} else {
-				if current == parent.right {
-					current = parent
-					tree.RotateLeft(current)
-					parent = current.parent
+				if node == parent.right {
+					node = parent
+					tree.RotateLeft(node)
+					parent = node.parent
 				}
 				parent.red = false
 				grandparent.red = true
@@ -104,7 +103,7 @@ func (tree *RBTree) RotateLeft(pivotParent *RBNode) {
 	}
 	pivot := pivotParent.right
 	pivotParent.right = pivot.left
-	if pivot.left != nil {
+	if pivot.left != tree.null {
 		pivot.left.parent = pivotParent
 	}
 	pivot.parent = pivotParent.parent
@@ -125,7 +124,7 @@ func (tree *RBTree) RotateRight(pivotParent *RBNode) {
 	}
 	pivot := pivotParent.left
 	pivotParent.left = pivot.right
-	if pivot.right != nil {
+	if pivot.right != tree.null {
 		pivot.right.parent = pivotParent
 	}
 	pivot.parent = pivotParent.parent
